@@ -40,7 +40,7 @@ desarrollo ágil. En concreto, *DevOps* comprende
 [los 7 aspectos siguientes, vistos en la página de una herramienta, Rex, usada para ello](http://www.rexify.org/):
 
 1. Automatización de tareas relacionadas con el desarrollo. En
-   resumen, que no haya que recordar comandos para hacer todo tipo de
+   resumen, que no haya que recordar o tener apuntados en una libreta comandos para hacer todo tipo de
    cosas (instalación de librerías o configuración de una máquina)
    sino que haya *scripts* que lo homogeneicen y automaticen.
 
@@ -61,7 +61,6 @@ desarrollo ágil. En concreto, *DevOps* comprende
 3. Despliegue en la nube: publicación de aplicaciones en servidores
    virtuales.
 
-
 4. [Ciclo de vida del software](http://es.slideshare.net/colmbennett/software-rollout)
    definición de las diferentes fases en la vida de una aplicación,
    desde el diseño hasta el soporte.
@@ -72,4 +71,8 @@ desarrollo ágil. En concreto, *DevOps* comprende
    despliegue continuo implica integración continua de las nuevas
    características y arreglos, tanto en el software como el hardware. 
 
+
+En esta sesión veremos la mayoría; en siguientes sesiones se verá la gestión de configuraciones, provisionamiento de los servidores y la virtualización.
+
+## Entornos virtuales de programación.
 
