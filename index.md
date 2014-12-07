@@ -74,5 +74,36 @@ desarrollo ágil. En concreto, *DevOps* comprende
 
 En esta sesión veremos la mayoría; en siguientes sesiones se verá la gestión de configuraciones, provisionamiento de los servidores y la virtualización.
 
-## Entornos virtuales de programación.
+## Entornos virtuales de desarrollo.
+
+Una de las partes esenciales del *DevOps* es primero la gestión de
+configuraciones y luego la automatización. El uso de entornos
+virtuales cubre las dos necesidades: te permite decidir exactamente
+qué versión del lenguaje se va a usar y también automatizar la tarea
+de instalación del mismo mediante el uso de una sola orden que
+seleccione la versión precisa que se va a usar. 
+
+Y estos entornos virtuales vienen del hecho de que los lenguajes de scripting tales como Perl, Python y Ruby tienen
+ciclos de desarrollo muy rápidos que hacen que a veces convivan en
+producción diferentes versiones de los mismos, incluso *major*
+versions. Eso hace complicado desarrollar e incluso probar los
+programas que se desarrollan: si el sistema operativo viene con Perl
+5.14, puede que haga falta probar o desarrollar para 5.16 o 5.18 o
+incluso probar la versión más avanzada.
+
+Por eso desde hacer cierto tiempo se han venido usando *entornos
+virtuales de desarrollo* tales como
+* [virtualenv para Python](https://virtualenv.pypa.io/en/latest/),
+* [nodeenv](https://pypi.python.org/pypi/nodeenv/), [nvm](https://github.com/creationix/nvm), [`n`](https://github.com/tj/n) y [nave](https://github.com/isaacs/nave) para node.js,
+* [`phpenv` para, lo adivinaste, PHP](https://github.com/phpenv/phpenv),
+* [rbenv](https://github.com/sstephenson/rbenv) y [RVM](http://rvm.io)para Ruby
+* y [plenv](https://github.com/tokuhirom/plenv) y [perlbrew para Perl](http://perlbrew.pl).
+
+Una vez instalados, estos programas permiten instalar fácilmente
+nuevas versiones de tu lenguaje de programación (con las librerías
+asociadas) y probar un programa en todas ellas. Se usan principalmente
+para reflejar localmente los entornos que se usan en producción; por
+ejemplo, usar en el entorno de desarrollo local la misma versión y
+librerías que nos vamos a encontrar en un PaaS tal como los que
+veremos a continuación.
 
