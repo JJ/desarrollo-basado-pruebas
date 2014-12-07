@@ -26,12 +26,9 @@ entornos de computación en nube y cómo configurarlos y usarlos para
 hacer más rápida y eficiente el trabajo de un equipo de desarrollo,
 test, y sistemas.
 
-
-Desde el punto de vista del desarrollo, la creación y gestión de
-infraestructuras virtuales entra dentro del concepto de
-[*DevOps*](http://en.wikipedia.org/wiki/DevOps), un concepto que
-abarca tanto sistemas como desarrollo y que está a caballo de
-ambos. En primer lugar, *DevOps* implica la automatizació de las
+El desarrollo basado en pruebas entra en relación con la computación nube dentro del concepto de
+[*DevOps*](http://en.wikipedia.org/wiki/DevOps), que
+abarca tanto sistemas como desarrollo y test y que está a caballo entre los dos primeros. En primer lugar, *DevOps* implica la automatización de las
 tareas de creación de un puesto de trabajo para desarrollo, pero
 también la sistematización de pruebas, de despliegue y de las tareas
 de configuración relacionadas con la misma, todo ello en un entorno de
