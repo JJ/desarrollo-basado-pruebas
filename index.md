@@ -128,3 +128,22 @@ mínimas, máximas o exactas deben tener.
 >en ningún paso de este proceso haya que decidir qué licencia o modelo
 >de pago o cosas similares hay que usar.
 
+## Vamos a hacer una aplicación: gestionar porras de fútbol
+
+Una porra de fútbol básicamente tiene un partido, que tendrá un nombre
+y si acaso una fecha o descripción (por ejemplo, *Jaén-Osasuna Copa
+2014*) y luego los participantes votan por un resultado determinado,
+*JJ, 2-1*, por ejemplo. Este sería el *modelo* sobre el que vamos a
+basar la aplicación.
+
+El objeto básico, por tanto, será la `Apuesta` que irá asociada a un
+`Partido`.
+
+>Diseñar en node.js estas clases con sus funcionalidades básicas:
+>crear partido y listar apuestas para cada partido, crear apuesta y añadirla
+>(comprobando que la persona no la haya añadido ya), borrar apuesta
+>(si no ha pagado o algo) y cerrar porra con el resultado definitivo,
+>anunciando el ganador. Crear un repositorio en GitHub para la
+>librería y crear un pequeño programa que use algunas de sus
+>funcionalidades. 
+
