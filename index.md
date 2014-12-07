@@ -78,8 +78,10 @@ En esta sesión veremos la mayoría; en siguientes sesiones se verá la gestión
 
 Una de las partes esenciales del *DevOps* es primero la gestión de
 configuraciones y luego la automatización. El uso de entornos
-virtuales cubre las dos necesidades: te permite decidir exactamente
-qué versión del lenguaje se va a usar y también automatizar la tarea
+virtuales cubre las dos necesidades: te permite independizar la
+versión usada de la que proporcione el sistema, instalarla sin
+necesidad de tener privilegios de superusuario, compartirla entre
+todos los miembros del equipo y también automatizar la tarea 
 de instalación del mismo mediante el uso de una sola orden que
 seleccione la versión precisa que se va a usar. 
 
@@ -99,6 +101,9 @@ virtuales de desarrollo* tales como
 * [rbenv](https://github.com/sstephenson/rbenv) y [RVM](http://rvm.io)para Ruby
 * y [plenv](https://github.com/tokuhirom/plenv) y [perlbrew para Perl](http://perlbrew.pl).
 
+Generalmente, estos programa funcionan instalando binarios en
+directorios del usuario
+
 Una vez instalados, estos programas permiten instalar fácilmente
 nuevas versiones de tu lenguaje de programación (con las librerías
 asociadas) y probar un programa en todas ellas. Se usan principalmente
@@ -106,4 +111,20 @@ para reflejar localmente los entornos que se usan en producción; por
 ejemplo, usar en el entorno de desarrollo local la misma versión y
 librerías que nos vamos a encontrar en un PaaS tal como los que
 veremos a continuación.
+
+>Instalar alguno de los entornos virtuales de node y, con ellos,
+>instalar la última versión existente, la versión *minor* más actual
+>de la 0.10 y lo mismo para la 0.11.
+
+
+Generalmente las librerías asociadas a una aplicación determinada
+siguen un método similar. En vez de instalar en el sistema todas las
+librerías necesarias (o instalar una cada vez que hay algún error),
+la mayor parte de los entornos de programación incluyen alguna forma
+de definir qué librerías (o módulos) necesitan y qué versiones
+mínimas, máximas o exactas deben tener.
+
+>Incidentalmente, el hecho de que todo sea software libre ayuda a que
+>en ningún paso de este proceso haya que decidir qué licencia o modelo
+>de pago o cosas similares hay que usar.
 
