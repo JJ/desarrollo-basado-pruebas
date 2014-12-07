@@ -145,5 +145,12 @@ El objeto básico, por tanto, será la `Apuesta` que irá asociada a un
 >(si no ha pagado o algo) y cerrar porra con el resultado definitivo,
 >anunciando el ganador. Crear un repositorio en GitHub para la
 >librería y crear un pequeño programa que use algunas de sus
->funcionalidades. 
+>funcionalidades.
+
+La aplicación tendrá más adelante un interfaz web, pero por lo pronto,
+y a efectos de la prueba continua de más adelante, vamos a quedarnos
+sólo con un pequeño programa que sirva para ver que funciona.
+
+>Ejecutar el programa en diferentes versiones de node. ¿Funciona en
+>todas ellas? 
 
