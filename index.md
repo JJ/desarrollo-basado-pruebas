@@ -163,27 +163,26 @@ ficheros que describen qué se usa y, en general, que es necesario
 instalar y tener para ejecutarlo. En node se usa un fichero en formato
 JSON tal como este:
 
-```
-{
-    "author": "J. J. Merelo <jjmerelo@gmail.com> (http://github.com/JJ/desarrollo-basado-pruebas)",
-    "name": "porrio",
-    "description": "Apuesta en una porra",
-    "version": "0.0.1",
-    "repository": {
-	"url": "git://github.com/JJ/desarrollo-basado-pruebas.git"
-    },
-    "main": "./Apuesta.js",
-    "scripts": {
-	"test": "make test"
-    },
-    "dependencies": {"sqlite": "~1.0"},
-    "devDependencies": {},
-    "optionalDependencies": {},
-    "engines": {
-	"node": ">=0.8"
-    }
-}
-```
+	{
+	  "author": "J. J. Merelo <jjmerelo@gmail.com> (http://github.com/JJ/desarrollo-basado-pruebas)",
+	  "name": "porrio",
+	  "description": "Apuesta en una porra",
+	  "version": "0.0.1",
+	  "repository": {
+	  "url": "git://github.com/JJ/desarrollo-basado-pruebas.git"
+	  },
+	  "main": "./Apuesta.js",
+	  "scripts": {
+	  "test": "make test"
+	  },
+	  "dependencies": {"sqlite": "~1.0"},
+	  "devDependencies": {},
+	  "optionalDependencies": {},
+	  "engines": {
+	  "node": ">=0.8"
+	  }
+	}
+
 
 Las partes que más nos interesan están hacia el final: las
 dependencias diversas (`dependencies`). Es un *hash* que dice qué
