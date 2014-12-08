@@ -10,7 +10,10 @@
     "scripts": {
 	"test": "make test"
     },
-    "dependencies": {"sqlite": "~1.0"},
+    "dependencies": {"sqlite": "~1.0",
+		     "docco": "~0.6",
+		     "grunt-docco": "~0.3"
+		    },
     "devDependencies": {},
     "optionalDependencies": {},
     "engines": {
