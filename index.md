@@ -94,7 +94,8 @@ programas que se desarrollan: si el sistema operativo viene con Perl
 incluso probar la versión más avanzada.
 
 Por eso desde hacer cierto tiempo se han venido usando *entornos
-virtuales de desarrollo* tales como
+virtuales de desarrollo* tales como:
+
 *  [virtualenv para Python](https://virtualenv.pypa.io/en/latest/),
 *  [nodeenv](https://pypi.python.org/pypi/nodeenv/), [nvm](https://github.com/creationix/nvm), [`n`](https://github.com/tj/n) y [nave](https://github.com/isaacs/nave) para node.js,
 *  [`phpenv` para, lo adivinaste, PHP](https://github.com/phpenv/phpenv),
