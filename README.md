@@ -384,23 +384,23 @@ de alto nivel. Como hay que escoger uno y parece que Mocha es más
 popular, nos quedamos con este para escribir este programa de test.
 
   var assert = require("assert"),
-	  apuesta = require(__dirname+"/../Apuesta.js");
+		apuesta = require(__dirname+"/../Apuesta.js");
 
-  describe('Apuesta', function(){
-	  // Testea que se haya cargado bien la librería
-	  describe('Carga', function(){
-	  it('should be loaded', function(){
-		  assert(apuesta, "Cargado");
-	  });
+	describe('Apuesta', function(){
+		// Testea que se haya cargado bien la librería
+		describe('Carga', function(){
+		it('should be loaded', function(){
+			assert(apuesta, "Cargado");
+		});
 
-	  });
-	  describe('Crea', function(){
-	  it('should create apuestas correctly', function(){
-		  var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
-		  assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
-	  });
-	  });
-  });
+		});
+		describe('Crea', function(){
+		it('should create apuestas correctly', function(){
+			var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
+			assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
+		});
+		});
+	});
 
 Mocha puede usar diferentes librerías de test. En este caso hemos
 escogido la que ya habíamos usado, `assert`. A bajo nivel, los tests
