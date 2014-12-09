@@ -6,7 +6,7 @@
   "repository": {
     "url": "git://github.com/JJ/desarrollo-basado-pruebas.git"
   },
-  "main": "./Apuesta.js",
+  "main": "./prueba.js",
   "scripts": {
     "test": "mocha"
   },
