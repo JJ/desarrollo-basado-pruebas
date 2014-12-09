@@ -430,7 +430,7 @@ que se ejecute.
 
 > Convertir los tests unitarios anteriors con assert a programas de
 > test y ejecutarlos desde *mocha*, usando descripciones del test y
-> del grupo de test de forma correcta.
+> del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
 
 
 ##Añadiendo integración continua.
@@ -443,3 +443,93 @@ una máquina externa que ejecute esos tests y nos diga cuáles han
 pasado o cuales no. Estas máquinas más adelante se combinan con las de
 despliegue continuo, no permitiendo el mismo si algún test no ha
 pasado.
+
+En general, la integración continua se hace *en la nube*: una máquina
+virtual creada ex profeso se descarga los ficheros, ejecuta los tests
+y crea un informe, enviando también un correo al autor indicándole el
+resultado. Por tanto, para que haga esto tenemos que indicar en la
+configuración todo lo necesario para ejecutar los tests y,
+posiblemente, nuestro programa: aplicaciones, librerías que necesita
+nuestro programa, aparte de la configuración que tendrá el programa en
+sí con las librerías del lenguaje de programación en el que está
+desarrollado.
+
+Un sistema bastante popular de integración continua es
+[Jenkins](http://jenkins-ci.org/), pero está enfocado sobre todo a
+Java. Jenkins lo puedes usar en la nube o instalarte tu propio
+ordenador para hacerlo. Sin embargo, está enfocado sobre todo a Java
+por lo que hay otros sistemas como [Travis](http://travis-ci.org) o
+[Shippable](https://www.shippable.com/) que podemos usar también desde
+la nube y, además, están preparados para más lenguajes de
+programación.
+
+Para trabajar con estos sistemas, generalmente hay que hacerlo en dos
+pasos
+
+1. Darse de alta. Muchos están conectados con GitHub por lo que puedes
+   usar directamente el usuario ahí. A través de un proceso de
+   autorización, acceder al contenido e incluso informar del resultado
+   de los tests.
+
+2. Dar de alta el repositorio en el que se vaya a aplicar la
+   integración continua. Travis permite hacerlo directamente desde tu
+   configuración, y otros se dan de alta desde la web de GitHub.
+
+3. Crear un fichero de configuración para que se ejecute la
+   integración y añadirlo al repositorio.
+
+
+> Haced los dos primeros pasos antes de pasar al tercero.
+
+Los ficheros de configuración de las máquinas de integración continua
+corresponden, aproximadamente, a una configuración de una máquina
+virtual que hiciera solo y exclusivamente la ejecución de los
+tests. Para ello se provisiona una máquina virtual (o contenedor), se
+le carga el sistema operativo y se instala lo necesario, indicado en
+el fichero de configuración tal como este para Travis.
+
+	language: node_js
+	node_js:
+	  - "0.10"
+	  - "0.11"
+	before_install:
+	  - npm install -g mocha
+	  - cd src; npm install .
+	script: cd src; mocha
+
+Este fichero, denominado `.travis.yml`, contiene lo siguiente:
+
+- `language` indica qué lenguaje se va a usar. Travis tiene
+  [varios lenguajes](http://docs.travis-ci.com/user/getting-started/),
+  incluyendo por supuesto nodejs. Las máquinas virtuales no suelen
+  estar configuradas para lenguajes arbitrarios, aunque por supuesto
+  se puede poner un lenguaje tal como C y luego descargar lo necesario
+  para otro lenguaje.
+
+- `node_js` en este caso indica las versiones que vamos a probar. Por
+  el mismo precio podemos probar varias versiones, en este caso las
+  dos últimas de node.
+
+- `before_install` se ejecuta antes de la instalación de la aplicación
+  (específica de cada lenguaje; por ejemplo en el caso de node.js
+  sería `npm install .`. En nuestro caso tenemos que instalar `mocha`
+  y además ejecutar este último paso en un subdirectorio que no es
+  estándar.
+
+- Finalmente, se ejecuta el script de prueba en sí (para el caso,
+  cualquier cosa que quieras ejecutar). Una vez más, nos cambiamos al
+  subdirectorio y ejecutamos `mocha` tal como lo hemos hecho
+  anteriormente.
+
+El resultado
+[aparecerá en la web](https://travis-ci.org/JJ/desarrollo-basado-pruebas)
+y también se enviará por correo electrónico. Y te da también un
+*badge* que puedes poner en tu fichero para indicar que, por lo
+pronto, todo funciona.
+
+Si el informe indica que las pruebas son correctas, se puede proceder al despliegue. Pero eso
+ya será en la siguiente clase.
+
+> Configurar integración continua para nuestra aplicación usando
+> Travis o algún otro sitio.
+
