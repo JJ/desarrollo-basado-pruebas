@@ -371,3 +371,67 @@ del mismo, y `equal` comprueba que efectivamente la salida que da la
 función `as_string` es la esperada.
 
 > Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
+
+Hay un segundo nivel, el marco de ejecución de los tests. Los marcos
+son programas que, a su vez, ejecutan los programas de test y escriben
+un informe sobre cuáles han fallado y cuáles no con más o menos
+parafernalia y farfolla. Una vez más, [hay varios marcos de testeo](http://stackoverflow.com/questions/4308786/what-is-the-best-testing-framework-to-use-with-node-js) para
+nodejs (y, por supuesto, uno propio para cada uno de los lenguajes de
+programación, aunque en algunos están realmente estandarizados).
+
+Cada uno de ellos tendrá sus promotores y detractores, pero
+[Mocha](http://mochajs.org/) y [Jasmine](http://jasmine.github.io/)
+parecen ser los más populares. Los dos usan un sistema denominado
+[Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development),
+que consiste en describir el comportamiento de un sistema más o menos
+de alto nivel. Como hay que escoger uno y parece que Mocha es más
+popular, nos quedamos con este para escribir este programa de test.
+
+  var assert = require("assert"),
+	  apuesta = require(__dirname+"/../Apuesta.js");
+
+  describe('Apuesta', function(){
+	  // Testea que se haya cargado bien la librería
+	  describe('Carga', function(){
+	  it('should be loaded', function(){
+		  assert(apuesta, "Cargado");
+	  });
+
+	  });
+	  describe('Crea', function(){
+	  it('should create apuestas correctly', function(){
+		  var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
+		  assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
+	  });
+	  });
+  });
+
+Mocha puede usar diferentes librerías de test. En este caso hemos
+escogido la que ya habíamos usado, `assert`. A bajo nivel, los tests
+que funcionen en este marco tendrán que usar una librería de este
+tipo, porque mocha funciona a un nivel superior, con funciones como
+`it` y `describes` que describe, a diferentes niveles, qué hace el
+test y cuál es el resultado que necesitamos. Se ejecuta con `mocha` y
+el resultado de ejecutarlo será:
+
+
+  Apuesta
+    Carga
+      ✓ should be loaded 
+    Crea
+      ✓ should create apuestas correctly 
+
+
+  2 passing (6ms)
+
+(pero con más colorines)
+
+>Y la verdad es que debería haber puesto los mensajes en español.
+
+Además, te indica el tiempo que ha tardado lo que te puede servir para
+hacer un *benchmark* de tu código en los diferentes entornos en los
+que se ejecute.
+
+> Convertir los tests unitarios anteriors con assert a programas de
+> test y ejecutarlos desde *mocha*, usando descripciones del test y
+> del grupo de test de forma correcta.
