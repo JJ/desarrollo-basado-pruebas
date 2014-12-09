@@ -4,14 +4,14 @@ module.exports = function(grunt) {
     
     // Configuración del proyecto
     grunt.initConfig({
+	// incluye la configuración
 	pkg: grunt.file.readJSON('package.json'),
-	docco: {
-	    debug: {
-		src: ['*.js'],
-		options: {
-		    output: 'docs/'
-		}
+	docco: {	   
+	    src: ['*.js'],
+	    options: {
+		output: 'docs/'
 	    }
+
 	}
     });
 
