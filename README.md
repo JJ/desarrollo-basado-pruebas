@@ -199,11 +199,282 @@ sistema similar: `bundle` para Ruby o `cpanm` para Perl, por ejemplo.
 
 > Crear una descripción del módulo usando `package.json`.
 
+`package.json` nos sirve para llevar un cierto control de qué es lo
+que necesita nuestra aplicación y, por tanto, nos va a ser bastante
+útil cuando digamos de desplegarlo o testearlo en la nube.
+
+No sólo eso, sino que es la referencia para otra serie de
+herramientas, como las herramientas de construcción. Las herramientas
+de construcción o de control de tareas se vienen usando
+tradicionalmente en todos los entornos de programación. Quién no ha
+usado alguna vez `make` o escrito un Makefile; lo que ocurre es que
+tradicionalmente se dedicaban exclusivamente a la compilación. Hoy en
+día el concepto de *construcción* es más amplio e incluye tareas que
+van desde el uso de diferentes generadores (de hojas CSS a partir de
+un lenguaje, por ejemplo) hasta la *minificación* o "compresión" de un
+programa hasta que ocupe el mínimo espacio posible, para que sea más
+*amigable* para móviles y otros dispositivos sin mucho ancho de banda.
+
+Todos los lenguajes de programación tienen su propia herramienta de
+construcción, pero en node.js se utilizan principalmente dos:
+[Grunt](http://gruntjs.com) y [Gulp](http://gulpjs.com).
+
+>Aquí podíamos hacer una breve disquisición sobre
+>[el código y la configuración](http://coding.abel.nu/2013/06/code-or-configuration-or-configuration-in-code/),
+>algo a lo que nos vamos a enfrentar repetidamente en la nube. ¿Un
+>fichero de construcción es, o debe ser, configuración o código?
+>Diferentes herramientas toman diferentes aproximaciones al tema:
+>`grunt` es, sobre todo, configuración, mientras que `gulp` es, sobre
+>todo, código.
+
+Algo fundamental en todo proyecto es la documentación; para empezar,
+vamos a usar `grunt` para documentar el código. Tras la instalación de
+`grunt`, que no viene instalado por defecto en nodejs, se puede usar
+directamente.
+
+	sudo npm install -g grunt-cli
+
+`-g` indica que se trata de una instalación global, aunque también se
+puede instalar localmente. 
+	
+Igual que make usa
+Makefiles, `grunt` usa `Gruntfile.js` tal como este
+
+  'use strict';
+
+  module.exports = function(grunt) {
+
+	  // Configuración del proyecto
+	  grunt.initConfig({
+	  pkg: grunt.file.readJSON('package.json'),
+	  docco: {
+		  debug: {
+		  src: ['*.js'],
+		  options: {
+			  output: 'docs/'
+		  }
+		  }
+	  }
+	  });
+
+	  // Carga el plugin de grunt para hacer esto
+	  grunt.loadNpmTasks('grunt-docco');
+
+	  // Tarea por omisión: generar la documentación
+	  grunt.registerTask('default', ['docco']);
+  };
+
+Para empezar, tenemos que instalar `docco` si queremos que funcione. Y
+`grunt` enfoca las tareas como una serie de *plugins* que hay que
+instalar, en este caso `grunt-docco`. Para instalarlos se usa la
+herramienta habitual de instalación en node, `npm`, pero una vez que
+usamos `package.json`, `npm` puede editarlo y cambiar la configuración
+automáticamente si lo usamos de esta forma
+
+	npm install docco grunt-docco --save-dev
+
+El `--save-dev` indica que se guarde la configuración correspondiente
+en `package.json`, donde efectivamente se puede ver:
+
+  "devDependencies": {
+    "docco": "~0.6",
+    "grunt-docco": "~0.3.3"
+  },
+
+El fichero que se ve arriba tiene tres partes: la definición de la
+tarea (en este caso, la que genera la documentación), la carga de la
+tarea y finalmente el registro de la tarea.
+
+Vayamos con la primera parte. Primero, le indicamos cuál es el fichero
+`package.json` que usamos. Este fichero tiene una serie de variables
+de configuración que podremos usar en el Gruntfile (pero que, por lo
+pronto, no vamos a hacerlo). Luego, definimos la tarea llamada
+`docco`, que a su vez tiene una subtarea llamada `debug`: toma los
+fuentes contenidos en el array indicado y deposita la salida en el
+directorio que le indicamos. No existe en Grunt una forma general de
+expresar este tipo de dependencias como en los Makefiles, sólo una
+buena práctica: usar `src`, por ejemplo, para las fuentes. 
+
+La siguiente parte carga el plugin de `grunt` necesario para ejecutar
+docco. Y finalmente, con `grunt.registerTask('default', ['docco']);`
+indicamos que la tarea que ejecuta docco es la que se ejecutará por
+defecto simplemente ejecutando `grunt`. También se puede ejecutar con
+`grunt docco` o `grunt docco:debug` que sacará esto en el terminal:
+
+	bash$ grunt docco
+	Running "docco:src" (docco) task
+	docco: Apuesta.js -> docs/Apuesta.html
+	docco: Gruntfile.js -> docs/Gruntfile.html
+
+y producirá una documentación tal como [esta](src/docs/Apuesta.html).
+
+La automatización de Grunt se puede usar tanto para prueba como para
+despliegue. Pero hay también otras formas de probar en la nube, y lo
+veremos a continuación.
+
+>Automatizar con `grunt` y `docco` (o algún otro sistema) la generación de documentación de la librería
+>que se cree. Previamente, por supuesto, habrá que documentar tal
+>librería. 
+
+## Desarrollo basado en pruebas
+
+El desarrollo basado en pruebas es una metodología que se integra con
+el desarrollo en la nube que hemos venido viendo de forma inconsútil
+(en inglés esto queda mejor; *seamless*). Hace falta pasar las pruebas
+para hacer el despliegue, pero también para integrar código. Las
+pruebas son a diferente nivel, pero las que vamos a usar, pruebas
+unitarias, consisten en llamar a una función con diferentes valores y
+comprobar los resultados esperados con los obtenidos. Los resultados
+pueden ser de todo tipo: desde simples escalares respuesta a una
+función hasta cambio en el DOM de una página cuando se envía un JSON
+desde una web. Cada uno tiene sus estrategias, pero al final se trata
+de crear una serie de pruebas para que lo que nosotros queremos que
+haga la aplicación efectivamente lo haga.
+
+El desarrollo basado en pruebas consiste en escribir los tests antes
+que el código que hace que esos tests *no* fallen. No siempre se hace
+así, claro, pero el trabajar así permite tener claro qué
+funcionalidades queremos, cómo queremos que respondan y qué
+*contratos* o *aserciones* van a ser verdaderas cuando se ejecute el
+código antes siquiera de escribirlo.
+
+En la mayoría de los entornos de programación y especialmente en node,
+que es en el que nos estamos fijando, hay dos niveles en el test: el
+primero es el marco de pruebas y el segundo la librería de pruebas que
+efectivamente se está usando.
+
+Vamos a ir al nivel más bajo: el de las aserciones. Hay [múltiples
+librerías que se pueden usar](http://stackoverflow.com/questions/14294567/assertions-library-for-node-js):
+[Chai](http://chaijs.com/),
+[Should.js](https://github.com/visionmedia/should.js),
+[Must.js](https://github.com/moll/js-must) y
+[`assert`](http://nodejs.org/api/assert.html) que es la librería que
+forma parte de la estándar de JS, y por tanto la que vamos a usar. Se
+usa de la forma siguiente
+
+	var apuesta = require("./Apuesta.js"),
+	assert= require("assert");
+
+	var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
+	assert(nueva_apuesta, "Creada apuesta");
+	assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
+	console.log("Si has llegado aquí, han pasado todos los tests");
+
+Este programa usa `assert` directamente y como se ve por la línea del
+final, no hace nada salvo que falle. `assert` no da error si existe el
+objeto, es decir, si no ha habido ningún error en la carga o creación
+del mismo, y `equal` comprueba que efectivamente la salida que da la
+función `as_string` es la esperada.
+
+> Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
+
+Hay un segundo nivel, el marco de ejecución de los tests. Los marcos
+son programas que, a su vez, ejecutan los programas de test y escriben
+un informe sobre cuáles han fallado y cuáles no con más o menos
+parafernalia y farfolla. Una vez más, [hay varios marcos de testeo](http://stackoverflow.com/questions/4308786/what-is-the-best-testing-framework-to-use-with-node-js) para
+nodejs (y, por supuesto, uno propio para cada uno de los lenguajes de
+programación, aunque en algunos están realmente estandarizados).
+
+Cada uno de ellos tendrá sus promotores y detractores, pero
+[Mocha](http://mochajs.org/) y [Jasmine](http://jasmine.github.io/)
+parecen ser los más populares. Los dos usan un sistema denominado
+[Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development),
+que consiste en describir el comportamiento de un sistema más o menos
+de alto nivel. Como hay que escoger uno y parece que Mocha es más
+popular, nos quedamos con este para escribir este programa de test.
+
+    var assert = require("assert"),
+		apuesta = require(__dirname+"/../Apuesta.js");
+
+	describe('Apuesta', function(){
+		// Testea que se haya cargado bien la librería
+		describe('Carga', function(){
+		it('should be loaded', function(){
+			assert(apuesta, "Cargado");
+		});
+
+		});
+		describe('Crea', function(){
+		it('should create apuestas correctly', function(){
+			var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
+			assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
+		});
+		});
+	});
+
+Mocha puede usar diferentes librerías de test. En este caso hemos
+escogido la que ya habíamos usado, `assert`. A bajo nivel, los tests
+que funcionen en este marco tendrán que usar una librería de este
+tipo, porque mocha funciona a un nivel superior, con funciones como
+`it` y `describes` que describe, a diferentes niveles, qué hace el
+test y cuál es el resultado que necesitamos. Se ejecuta con `mocha` y
+el resultado de ejecutarlo será:
 
 
+    Apuesta
+      Carga
+        ✓ should be loaded 
+      Crea
+        ✓ should create apuestas correctly 
 
 
+    2 passing (6ms)
+
+(pero con más colorines)
+
+>Y la verdad es que debería haber puesto los mensajes en español.
+
+Además, te indica el tiempo que ha tardado lo que te puede servir para
+hacer un *benchmark* de tu código en los diferentes entornos en los
+que se ejecute.
+
+> Convertir los tests unitarios anteriors con assert a programas de
+> test y ejecutarlos desde *mocha*, usando descripciones del test y
+> del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
 
 
+##Añadiendo integración continua.
 
+A un primer nivel, la integración continua consiste en integrar los
+cambios hechos por un miembro del equipo en el momento que estén y
+pasen los tests. Pero eso, efectivamente, significa que deben pasar
+los tests y para nosotros, consiste en crear una configuración para
+una máquina externa que ejecute esos tests y nos diga cuáles han
+pasado o cuales no. Estas máquinas más adelante se combinan con las de
+despliegue continuo, no permitiendo el mismo si algún test no ha
+pasado.
+
+En general, la integración continua se hace *en la nube*: una máquina
+virtual creada ex profeso se descarga los ficheros, ejecuta los tests
+y crea un informe, enviando también un correo al autor indicándole el
+resultado. Por tanto, para que haga esto tenemos que indicar en la
+configuración todo lo necesario para ejecutar los tests y,
+posiblemente, nuestro programa: aplicaciones, librerías que necesita
+nuestro programa, aparte de la configuración que tendrá el programa en
+sí con las librerías del lenguaje de programación en el que está
+desarrollado.
+
+Un sistema bastante popular de integración continua es
+[Jenkins](http://jenkins-ci.org/), pero está enfocado sobre todo a
+Java. Jenkins lo puedes usar en la nube o instalarte tu propio
+ordenador para hacerlo. Sin embargo, está enfocado sobre todo a Java
+por lo que hay otros sistemas como [Travis](http://travis-ci.org) o
+[Shippable](https://www.shippable.com/) que podemos usar también desde
+la nube y, además, están preparados para más lenguajes de
+programación.
+
+Para trabajar con estos sistemas, generalmente hay que hacerlo en dos
+pasos
+
+1. Darse de alta. Muchos están conectados con GitHub por lo que puedes
+   usar directamente el usuario ahí. A través de un proceso de
+   autorización, acceder al contenido e incluso informar del resultado
+   de los tests.
+
+2. Dar de alta el repositorio en el que se vaya a aplicar la
+   integración continua. Travis permite hacerlo directamente desde tu
+   configuración, y otros se dan de alta desde la web de GitHub.
+
+3. Crear un fichero de configuración para que se ejecute la
+   integración y añadirlo al repositorio.
 
