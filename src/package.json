@@ -8,14 +8,16 @@
   },
   "main": "./Apuesta.js",
   "scripts": {
-    "test": "make test"
+    "test": "mocha"
   },
   "dependencies": {
     "sqlite3": "~3.0"
   },
   "devDependencies": {
+    "assert": "^1.1.2",
     "docco": "~0.6",
-    "grunt-docco": "~0.3.3"
+    "grunt-docco": "~0.3.3",
+    "mocha": "~2.0.1"
   },
   "optionalDependencies": {},
   "engines": {
