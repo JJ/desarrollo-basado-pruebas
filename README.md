@@ -308,3 +308,27 @@ defecto simplemente ejecutando `grunt`. También se puede ejecutar con
 
 y producirá una documentación tal como [esta](src/docs/Apuesta.html).
 
+La automatización de Grunt se puede usar tanto para prueba como para despliegue. Pero hay también otras formas de probar en la nube, y lo veremos a continuación.
+
+## Desarrollo basado en pruebas
+
+El desarrollo basado en pruebas es una metodología que se integra con
+el desarrollo en la nube que hemos venido viendo de forma inconsútil
+(en inglés esto queda mejor; *seamless*). Hace falta pasar las pruebas
+para hacer el despliegue, pero también para integrar código. Las
+pruebas son a diferente nivel, pero las que vamos a usar, pruebas
+unitarias, consisten en llamar a una función con diferentes valores y
+comprobar los resultados esperados con los obtenidos. Los resultados
+pueden ser de todo tipo: desde simples escalares respuesta a una
+función hasta cambio en el DOM de una página cuando se envía un JSON
+desde una web. Cada uno tiene sus estrategias, pero al final se trata
+de crear una serie de pruebas para que lo que nosotros queremos que
+haga la aplicación efectivamente lo haga.
+
+El desarrollo basado en pruebas consiste en escribir los tests antes
+que el código que hace que esos tests *no* fallen. No siempre se hace
+así, claro, pero el trabajar así permite tener claro qué
+funcionalidades queremos, cómo queremos que respondan y qué
+*contratos* o *aserciones* van a ser verdaderas cuando se ejecute el
+código antes siquiera de escribirlo.
+
