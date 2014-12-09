@@ -365,3 +365,5 @@ final, no hace nada salvo que falle. `assert` no da error si existe el
 objeto, es decir, si no ha habido ningún error en la carga o creación
 del mismo, y `equal` comprueba que efectivamente la salida que da la
 función `as_string` es la esperada.
+
+> Para la aplicación que se está haciendo, escribir una serie de aserciones y probar que efectivamente no fallan. Añadir tests para una nueva funcionalidad, probar que falla y escribir el código para que no lo haga (vamos, lo que viene siendo TDD).
