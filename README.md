@@ -332,3 +332,15 @@ funcionalidades queremos, cómo queremos que respondan y qué
 *contratos* o *aserciones* van a ser verdaderas cuando se ejecute el
 código antes siquiera de escribirlo.
 
+En la mayoría de los entornos de programación y especialmente en node,
+que es en el que nos estamos fijando, hay dos niveles en el test: el
+primero es el marco de pruebas y el segundo la librería de pruebas que
+efectivamente se está usando.
+
+Vamos a ir al nivel más bajo: el de las aserciones. Hay [múltiples
+librerías que se pueden usar](http://stackoverflow.com/questions/14294567/assertions-library-for-node-js):
+[Chai](http://chaijs.com/),
+[Should.js](https://github.com/visionmedia/should.js),
+[Must.js](https://github.com/moll/js-must) y
+[`assert`](http://nodejs.org/api/assert.html) que es la librería que
+forma parte de la estándar de JS, y por tanto la que vamos a usar.
