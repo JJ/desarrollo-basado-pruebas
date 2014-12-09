@@ -363,3 +363,9 @@ usa de la forma siguiente
 	assert(nueva_apuesta, "Creada apuesta");
 	assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
 	console.log("Si has llegado aquí, han pasado todos los tests");
+
+Este programa usa `assert` directamente y como se ve por la línea del
+final, no hace nada salvo que falle. `assert` no da error si existe el
+objeto, es decir, si no ha habido ningún error en la carga o creación
+del mismo, y `equal` comprueba que efectivamente la salida que da la
+función `as_string` es la esperada.
