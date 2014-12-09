@@ -140,11 +140,12 @@ basar la aplicación.
 El objeto básico, por tanto, será la `Apuesta` que irá asociada a un
 `Partido`.
 
->Diseñar en node.js estas clases con sus funcionalidades básicas:
->crear partido y listar apuestas para cada partido, crear apuesta y añadirla
->(comprobando que la persona no la haya añadido ya), borrar apuesta
->(si no ha pagado o algo) y cerrar porra con el resultado definitivo,
->anunciando el ganador. Crear un repositorio en GitHub para la
+>Como ejercicio, algo ligeramente diferente: una web para calificar
+>las empresas en las que hacen prácticas los alumnos. Las acciones serían
+>crear empresa y listar calificaciones para cada empresa, crear calificación y añadirla
+>(comprobando que la persona no la haya añadido ya), borrar calificación
+>(si se arrepiente o te denuncia la empresa o algo) y hacer un ránking
+>de empresas por calificación, por ejemplo. Crear un repositorio en GitHub para la
 >librería y crear un pequeño programa que use algunas de sus
 >funcionalidades.
 
@@ -176,7 +177,7 @@ JSON tal como este:
 	  "scripts": {
 	  "test": "make test"
 	  },
-	  "dependencies": {"sqlite": "~1.0"},
+	  "dependencies": {"sqlite3": "~3.0"},
 	  "devDependencies": {},
 	  "optionalDependencies": {},
 	  "engines": {
@@ -200,8 +201,81 @@ Este fichero, además, permite instalar todas las dependencias usando
 sólo `npm install .`. Casi todos los lenguajes habituales tienen algún
 sistema similar: `bundle` para Ruby o `cpanm` para Perl, por ejemplo. 
 
-> Crear una descripción del módulo usando package.json.
+> Crear una descripción del módulo usando `package.json`.
 
+`package.json` nos sirve para llevar un cierto control de qué es lo
+que necesita nuestra aplicación y, por tanto, nos va a ser bastante
+útil cuando digamos de desplegarlo o testearlo en la nube.
+
+No sólo eso, sino que es la referencia para otra serie de
+herramientas, como las herramientas de construcción. Las herramientas
+de construcción o de control de tareas se vienen usando
+tradicionalmente en todos los entornos de programación. Quién no ha
+usado alguna vez `make` o escrito un Makefile; lo que ocurre es que
+tradicionalmente se dedicaban exclusivamente a la compilación. Hoy en
+día el concepto de *construcción* es más amplio e incluye tareas que
+van desde el uso de diferentes generadores (de hojas CSS a partir de
+un lenguaje, por ejemplo) hasta la *minificación* o "compresión" de un
+programa hasta que ocupe el mínimo espacio posible, para que sea más
+*amigable* para móviles y otros dispositivos sin mucho ancho de banda.
+
+Todos los lenguajes de programación tienen su propia herramienta de
+construcción, pero en node.js se utilizan principalmente dos:
+[Grunt](http://gruntjs.com) y [Gulp](http://gulpjs.com).
+
+>Aquí podíamos hacer una breve disquisición sobre
+>[el código y la configuración](http://coding.abel.nu/2013/06/code-or-configuration-or-configuration-in-code/),
+>algo a lo que nos vamos a enfrentar repetidamente en la nube. ¿Un
+>fichero de construcción es, o debe ser, configuración o código?
+>Diferentes herramientas toman diferentes aproximaciones al tema:
+>`grunt` es, sobre todo, configuración, mientras que `gulp` es, sobre
+>todo, código.
+
+Algo fundamental en todo proyecto es la documentación; para empezar,
+vamos a usar `grunt` para documentar el código. Tras la instalación de
+`grunt`, que no viene instalado por defecto en nodejs, se puede usar
+directamente.
+
+	sudo npm install -g grunt-cli
+
+`-g` indica que se trata de una instalación global, aunque también se
+puede instalar localmente. 
+	
+Igual que make usa
+Makefiles, `grunt` usa `Gruntfile.js` tal como este
+
+  'use strict';
+
+  module.exports = function(grunt) {
+
+	  // Configuración del proyecto
+	  grunt.initConfig({
+	  pkg: grunt.file.readJSON('package.json'),
+	  docco: {
+		  debug: {
+		  src: ['*.js'],
+		  options: {
+			  output: 'docs/'
+		  }
+		  }
+	  }
+	  });
+
+	  // Carga el plugin de grunt para hacer esto
+	  grunt.loadNpmTasks('grunt-docco');
+
+	  // Tarea por omisión: generar la documentación
+	  grunt.registerTask('default', ['docco']);
+  };
+
+Para empezar, tenemos que instalar `docco` si queremos que funcione. Y
+`grunt` enfoca las tareas como una serie de *plugins* que hay que
+instalar, en este caso `grunt-docco`. Para instalarlos se usa la
+herramienta habitual de instalación en node, `npm`, pero una vez que
+usamos `package.json`, `npm` puede editarlo y cambiar la configuración
+automáticamente si lo usamos de esta forma
+
+	npm install docco grunt-docco --save-dev
 
 
 
