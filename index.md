@@ -299,4 +299,16 @@ directorio que le indicamos. No existe en Grunt una forma general de
 expresar este tipo de dependencias como en los Makefiles, sólo una
 buena práctica: usar `src`, por ejemplo, para las fuentes. 
 
+La siguiente parte carga el plugin de `grunt` necesario para ejecutar
+docco. Y finalmente, con `grunt.registerTask('default', ['docco']);`
+indicamos que la tarea que ejecuta docco es la que se ejecutará por
+defecto simplemente ejecutando `grunt`. También se puede ejecutar con
+`grunt docco` o `grunt docco:debug` que sacará esto en el terminal:
+
+	bash$ grunt docco
+	Running "docco:src" (docco) task
+	docco: Apuesta.js -> docs/Apuesta.html
+	docco: Gruntfile.js -> docs/Gruntfile.html
+
+y producirá una documentación tal como [esta](src/docs/Apuesta.html).
 
