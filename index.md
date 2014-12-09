@@ -277,8 +277,26 @@ automáticamente si lo usamos de esta forma
 
 	npm install docco grunt-docco --save-dev
 
+El `--save-dev` indica que se guarde la configuración correspondiente
+en `package.json`, donde efectivamente se puede ver:
 
+  "devDependencies": {
+    "docco": "~0.6",
+    "grunt-docco": "~0.3.3"
+  },
 
+El fichero que se ve arriba tiene tres partes: la definición de la
+tarea (en este caso, la que genera la documentación), la carga de la
+tarea y finalmente el registro de la tarea.
 
+Vayamos con la primera parte. Primero, le indicamos cuál es el fichero
+`package.json` que usamos. Este fichero tiene una serie de variables
+de configuración que podremos usar en el Gruntfile (pero que, por lo
+pronto, no vamos a hacerlo). Luego, definimos la tarea llamada
+`docco`, que a su vez tiene una subtarea llamada `debug`: toma los
+fuentes contenidos en el array indicado y deposita la salida en el
+directorio que le indicamos. No existe en Grunt una forma general de
+expresar este tipo de dependencias como en los Makefiles, sólo una
+buena práctica: usar `src`, por ejemplo, para las fuentes. 
 
 
