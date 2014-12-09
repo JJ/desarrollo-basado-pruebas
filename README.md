@@ -308,7 +308,13 @@ defecto simplemente ejecutando `grunt`. También se puede ejecutar con
 
 y producirá una documentación tal como [esta](src/docs/Apuesta.html).
 
-La automatización de Grunt se puede usar tanto para prueba como para despliegue. Pero hay también otras formas de probar en la nube, y lo veremos a continuación.
+La automatización de Grunt se puede usar tanto para prueba como para
+despliegue. Pero hay también otras formas de probar en la nube, y lo
+veremos a continuación.
+
+>Automatizar con `grunt` y `docco` (o algún otro sistema) la generación de documentación de la librería
+>que se cree. Previamente, por supuesto, habrá que documentar tal
+>librería. 
 
 ## Desarrollo basado en pruebas
 
@@ -343,4 +349,13 @@ librerías que se pueden usar](http://stackoverflow.com/questions/14294567/asser
 [Should.js](https://github.com/visionmedia/should.js),
 [Must.js](https://github.com/moll/js-must) y
 [`assert`](http://nodejs.org/api/assert.html) que es la librería que
-forma parte de la estándar de JS, y por tanto la que vamos a usar.
+forma parte de la estándar de JS, y por tanto la que vamos a usar. Se
+usa de la forma siguiente
+
+	var apuesta = require("./Apuesta.js"),
+	assert= require("assert");
+
+	var nueva_apuesta = new apuesta.Apuesta('Polopos','Alhama','2-3');
+	assert(nueva_apuesta, "Creada apuesta");
+	assert.equal(nueva_apuesta.as_string(), "Polopos: Alhama - 2-3","Creado");
+	console.log("Si has llegado aquí, han pasado todos los tests");
