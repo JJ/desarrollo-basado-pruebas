@@ -387,7 +387,7 @@ que consiste en describir el comportamiento de un sistema más o menos
 de alto nivel. Como hay que escoger uno y parece que Mocha es más
 popular, nos quedamos con este para escribir este programa de test.
 
-  var assert = require("assert"),
+    var assert = require("assert"),
 		apuesta = require(__dirname+"/../Apuesta.js");
 
 	describe('Apuesta', function(){
@@ -415,14 +415,14 @@ test y cuál es el resultado que necesitamos. Se ejecuta con `mocha` y
 el resultado de ejecutarlo será:
 
 
-  Apuesta
-    Carga
-      ✓ should be loaded 
-    Crea
-      ✓ should create apuestas correctly 
+    Apuesta
+      Carga
+        ✓ should be loaded 
+      Crea
+        ✓ should create apuestas correctly 
 
 
-  2 passing (6ms)
+    2 passing (6ms)
 
 (pero con más colorines)
 
