@@ -482,3 +482,58 @@ pasos
 3. Crear un fichero de configuración para que se ejecute la
    integración y añadirlo al repositorio.
 
+
+> Haced los dos primeros pasos antes de pasar al tercero.
+
+Los ficheros de configuración de las máquinas de integración continua
+corresponden, aproximadamente, a una configuración de una máquina
+virtual que hiciera solo y exclusivamente la ejecución de los
+tests. Para ello se provisiona una máquina virtual (o contenedor), se
+le carga el sistema operativo y se instala lo necesario, indicado en
+el fichero de configuración tal como este para Travis.
+
+	language: node_js
+	node_js:
+	  - "0.10"
+	  - "0.11"
+	before_install:
+	  - npm install -g mocha
+	  - cd src; npm install .
+	script: cd src; mocha
+
+Este fichero, denominado `.travis.yml`, contiene lo siguiente:
+
+- `language` indica qué lenguaje se va a usar. Travis tiene
+  [varios lenguajes](http://docs.travis-ci.com/user/getting-started/),
+  incluyendo por supuesto nodejs. Las máquinas virtuales no suelen
+  estar configuradas para lenguajes arbitrarios, aunque por supuesto
+  se puede poner un lenguaje tal como C y luego descargar lo necesario
+  para otro lenguaje.
+
+- `node_js` en este caso indica las versiones que vamos a probar. Por
+  el mismo precio podemos probar varias versiones, en este caso las
+  dos últimas de node.
+
+- `before_install` se ejecuta antes de la instalación de la aplicación
+  (específica de cada lenguaje; por ejemplo en el caso de node.js
+  sería `npm install .`. En nuestro caso tenemos que instalar `mocha`
+  y además ejecutar este último paso en un subdirectorio que no es
+  estándar.
+
+- Finalmente, se ejecuta el script de prueba en sí (para el caso,
+  cualquier cosa que quieras ejecutar). Una vez más, nos cambiamos al
+  subdirectorio y ejecutamos `mocha` tal como lo hemos hecho
+  anteriormente.
+
+El resultado
+[aparecerá en la web](https://travis-ci.org/JJ/desarrollo-basado-pruebas)
+y también se enviará por correo electrónico. Y te da también un
+*badge* que puedes poner en tu fichero para indicar que, por lo
+pronto, todo funciona.
+
+Si el informe indica que las pruebas son correctas, se puede proceder al despliegue. Pero eso
+ya será en la siguiente clase.
+
+> Configurar integración continua para nuestra aplicación usando
+> Travis o algún otro sitio.
+
