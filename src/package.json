@@ -11,7 +11,6 @@
     "test": "mocha"
   },
   "dependencies": {
-    "express": "^4.10.4",
     "sqlite3": "~3.0"
   },
   "devDependencies": {
