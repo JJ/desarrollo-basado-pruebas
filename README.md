@@ -33,7 +33,7 @@ tareas de creación de un puesto de trabajo para desarrollo, pero
 también la sistematización de pruebas, de despliegue y de las tareas
 de configuración relacionadas con la misma, todo ello en un entorno de
 desarrollo ágil. En concreto, *DevOps* comprende
-[los 7 aspectos siguientes, vistos en la página de una herramienta, Rex, usada para ello](http://www.rexify.org/):
+[los 7 aspectos siguientes, vistos en la página de una herramienta, Rex, que es parte de la panoplia usada para esos menesteres](http://www.rexify.org/): 
 
 1. Automatización de tareas relacionadas con el desarrollo. En
    resumen, que no haya que recordar o tener apuntados en una libreta comandos para hacer todo tipo de
@@ -68,12 +68,14 @@ desarrollo ágil. En concreto, *DevOps* comprende
    características y arreglos, tanto en el software como el hardware. 
 
 
-En esta sesión veremos la mayoría; en siguientes sesiones se verá la gestión de configuraciones, provisionamiento de los servidores y la virtualización.
+En esta sesión veremos la mayoría; en siguientes sesiones se verá la
+gestión de configuraciones, provisionamiento de los servidores,
+despliegue continuo y virtualización.
 
 ## Entornos virtuales de desarrollo.
 
-Una de las partes esenciales del *DevOps* es primero la gestión de
-configuraciones y luego la automatización. El uso de entornos
+Una de las partes esenciales de la cultura *DevOps* es la gestión de
+configuraciones; a continuación,  la automatización. El uso de entornos
 virtuales cubre las dos necesidades: te permite independizar la
 versión usada de la que proporcione el sistema, instalarla sin
 necesidad de tener privilegios de superusuario, compartirla entre
@@ -112,7 +114,6 @@ veremos a continuación.
 >Instalar alguno de los entornos virtuales de node y, con ellos,
 >instalar la última versión existente, la versión *minor* más actual
 >de la 0.10 y lo mismo para la 0.11.
-
 
 Generalmente las librerías asociadas a una aplicación determinada
 siguen un método similar. En vez de instalar en el sistema todas las
@@ -471,15 +472,15 @@ pasos
    autorización, acceder al contenido e incluso informar del resultado
    de los tests.
 
-2. Dar de alta el repositorio en el que se vaya a aplicar la
+2. Activar el repositorio en el que se vaya a aplicar la
    integración continua. Travis permite hacerlo directamente desde tu
-   configuración, y otros se dan de alta desde la web de GitHub.
+   configuración; en otros se dan de alta desde la web de GitHub.
 
 3. Crear un fichero de configuración para que se ejecute la
    integración y añadirlo al repositorio.
 
 
-> Haced los dos primeros pasos antes de pasar al tercero.
+> *Ejercicio*: Haced los dos primeros pasos antes de pasar al tercero.
 
 Los ficheros de configuración de las máquinas de integración continua
 corresponden, aproximadamente, a una configuración de una máquina
@@ -533,3 +534,15 @@ ya será en la siguiente clase.
 > Configurar integración continua para nuestra aplicación usando
 > Travis o algún otro sitio.
 
+Esta configuración es esencial por varias razones: primero, porque nos
+permite ser conscientes de todo lo necesario para desplegar nuestra
+aplicación. Segundo, porque al crear tests integramos el paso de
+control de calidad en el desarrollo. Y, finalmente, porque la
+integración continua y los tests correspondientes son un paso esencial
+para el despliegue continuo, que se verá más adelante.
+
+## A dónde ir desde aquí
+
+Una vez visto todo lo necesario para desplegar una aplicación, se
+puede pasar a estudiar los
+[*PaaS*, plataformas como servicio](http://jj.github.io/trabajando-con-PaaS). 
