@@ -10,14 +10,14 @@ Desarrollo basado en pruebas
 ## Introducción
 
 Los ciclos de desarrollo de software actuales son ágiles y rápidos, de
-forma que continuamente se están arreglando errores y programando
+forma que continuamente se están arreglando errores, programando
 nuevas características y desplegándolas en producción. Para que esto
-suceda el ciclo de desarrollo de software debe estar automatizado en
-todo lo posible, para que todas las fases se hagan esencialmente si
-intervención humana y se minimice la posibilidad de que haya errores
-en el proceso que sean costosos de arreglar una vez echado a andar un
-sistema. La aparición de la nube ha hecho que en varias, o en todas,
-las partes del proceso, aparezca recursos elásticos y disponibles bajo
+sea posible todo este ciclo de vida del software debe estar automatizado en
+todo lo posible, para que todas las fases se hagan esencialmente sin
+intervención humana y se minimice la posibilidad de que haya 
+en el proceso errores costosos de arreglar una vez echado a andar un
+sistema. La aparición de la [nube](https://es.wikipedia.org/wiki/Computaci%C3%B3n_en_la_nube) ha hecho que en varias, o en todas,
+las partes del proceso, aparezcan recursos *elásticos* y disponibles bajo
 demanda, algunos de ellos gratuitos.
 
 Por eso, en esta parte del curso, veremos cómo desarrollar según la
@@ -28,7 +28,7 @@ test, y sistemas.
 
 El desarrollo basado en pruebas entra en relación con la computación nube dentro del concepto de
 [*DevOps*](http://en.wikipedia.org/wiki/DevOps), que
-abarca tanto sistemas como desarrollo y test y que está a caballo entre los dos primeros. En primer lugar, *DevOps* implica la automatización de las
+abarca tanto sistemas, es decir, el soporte físico donde se van a ejecutar las aplicaciones, como desarrollo y test y que está a caballo entre los dos primeros. En primer lugar, *DevOps* implica la automatización de las
 tareas de creación de un puesto de trabajo para desarrollo, pero
 también la sistematización de pruebas, de despliegue y de las tareas
 de configuración relacionadas con la misma, todo ello en un entorno de
@@ -101,7 +101,7 @@ virtuales de desarrollo* tales como:
 *  y [plenv](https://github.com/tokuhirom/plenv) y [perlbrew para Perl](http://perlbrew.pl).
 
 Generalmente, estos programa funcionan instalando binarios en
-directorios del usuario
+directorios del usuario y modificando el camino de ejecución para que se usen estas versiones en vez de las instaladas en el sistema. 
 
 Una vez instalados, estos programas permiten instalar fácilmente
 nuevas versiones de tu lenguaje de programación (con las librerías
@@ -111,7 +111,7 @@ ejemplo, usar en el entorno de desarrollo local la misma versión y
 librerías que nos vamos a encontrar en un PaaS tal como los que
 veremos a continuación.
 
->Instalar alguno de los entornos virtuales de node y, con ellos,
+>Instalar alguno de los entornos virtuales de `node.js` y, con ellos,
 >instalar la última versión existente, la versión *minor* más actual
 >de la 0.10 y lo mismo para la 0.11.
 
