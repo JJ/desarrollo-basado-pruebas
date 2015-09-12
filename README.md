@@ -241,9 +241,9 @@ puede instalar localmente.
 Igual que make usa
 Makefiles, `grunt` usa `Gruntfile.js` tal como este
 
-  'use strict';
+    'use strict';
 
-  module.exports = function(grunt) {
+    module.exports = function(grunt) {
 
 	  // Configuración del proyecto
 	  grunt.initConfig({
@@ -263,7 +263,7 @@ Makefiles, `grunt` usa `Gruntfile.js` tal como este
 
 	  // Tarea por omisión: generar la documentación
 	  grunt.registerTask('default', ['docco']);
-  };
+    };
 
 Para empezar, tenemos que instalar `docco` si queremos que funcione. Y
 `grunt` enfoca las tareas como una serie de *plugins* que hay que
@@ -277,10 +277,10 @@ automáticamente si lo usamos de esta forma
 El `--save-dev` indica que se guarde la configuración correspondiente
 en `package.json`, donde efectivamente se puede ver:
 
-  "devDependencies": {
-    "docco": "~0.6",
-    "grunt-docco": "~0.3.3"
-  },
+	"devDependencies": {
+	  "docco": "~0.6",
+	  "grunt-docco": "~0.3.3"
+	},
 
 El fichero que se ve arriba tiene tres partes: la definición de la
 tarea (en este caso, la que genera la documentación), la carga de la
@@ -429,7 +429,7 @@ Además, te indica el tiempo que ha tardado lo que te puede servir para
 hacer un *benchmark* de tu código en los diferentes entornos en los
 que se ejecute.
 
-> Convertir los tests unitarios anteriors con assert a programas de
+> Convertir los tests unitarios anteriores con assert a programas de
 > test y ejecutarlos desde *mocha*, usando descripciones del test y
 > del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
 
