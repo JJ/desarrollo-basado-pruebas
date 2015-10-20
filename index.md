@@ -125,7 +125,7 @@ ejemplo, usar en el entorno de desarrollo local la misma versión y
 librerías que nos vamos a encontrar en un PaaS tal como los que
 veremos a continuación.
 
->Instalar alguno de los entornos virtuales de node y, con ellos,
+>Instalar alguno de los entornos virtuales de `node.js` y, con ellos,
 >instalar la última versión existente, la versión *minor* más actual
 >(que suele denominarse siempre *stable*) y alguna experimental más
 >avanzada. 
