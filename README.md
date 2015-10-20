@@ -9,69 +9,59 @@ Desarrollo basado en pruebas
 
 ## Introducción
 
->Si no lo has hecho antes, conviene que en este momento
->[aprendas git](https://mini-git.github.io/) y te abras una cuenta en
->[GitHub](https://github.com). 
-
-Los ciclos de
-[desarrollo de software actuales son ágiles y rápidos](https://es.wikipedia.org/wiki/Desarrollo_%C3%A1gil_de_software),
-de 
-forma que continuamente se están arreglando errores, programando
-nuevas características y desplegándolas para pruebas y en producción. Para que esto
-sea posible este ciclo de vida debe estar automatizado en
-todo lo posible, de forma que todas las fases se hagan esencialmente sin
-intervención humana y se minimice la posibilidad de que haya 
-en el proceso errores que sean costosos de arreglar una vez echado a andar un
-sistema. La aparición de la [nube](https://es.wikipedia.org/wiki/Computaci%C3%B3n_en_la_nube) ha hecho que en varias, o en todas,
-las partes del proceso, aparezcan recursos *elásticos* y disponibles bajo
+Los ciclos de desarrollo de software actuales son ágiles y rápidos, de
+forma que continuamente se están arreglando errores y programando
+nuevas características y desplegándolas en producción. Para que esto
+suceda el ciclo de desarrollo de software debe estar automatizado en
+todo lo posible, para que todas las fases se hagan esencialmente si
+intervención humana y se minimice la posibilidad de que haya errores
+en el proceso que sean costosos de arreglar una vez echado a andar un
+sistema. La aparición de la nube ha hecho que en varias, o en todas,
+las partes del proceso, aparezca recursos elásticos y disponibles bajo
 demanda, algunos de ellos gratuitos.
 
 Por eso, en esta parte del curso, veremos cómo desarrollar según la
 metodología basada en pruebas con los
 entornos de computación en nube y cómo configurarlos y usarlos para
 hacer más rápida y eficiente el trabajo de un equipo de desarrollo,
-test y sistemas.
+test, y sistemas.
 
 El desarrollo basado en pruebas entra en relación con la computación nube dentro del concepto de
-[*DevOps*](https://en.wikipedia.org/wiki/DevOps), que
-abarca tanto sistemas, es decir, el soporte físico donde se van a
-ejecutar las aplicaciones, como desarrollo y test y que está a caballo
-entre los dos primeros. En primer lugar, *DevOps* implica la
-automatización de las 
+[*DevOps*](http://en.wikipedia.org/wiki/DevOps), que
+abarca tanto sistemas como desarrollo y test y que está a caballo entre los dos primeros. En primer lugar, *DevOps* implica la automatización de las
 tareas de creación de un puesto de trabajo para desarrollo, pero
-también la sistematización de los entornos de pruebas y de despliegue y de las tareas
+también la sistematización de pruebas, de despliegue y de las tareas
 de configuración relacionadas con la misma, todo ello en un entorno de
 desarrollo ágil. En concreto, *DevOps* comprende
 [los 7 aspectos siguientes, vistos en la página de una herramienta, Rex, que es parte de la panoplia usada para esos menesteres](http://www.rexify.org/): 
 
-1. *Automatización de tareas relacionadas con el desarrollo*. En
-   resumen, que no haya que recordar o tener apuntados en una libreta
-   comandos para hacer todo tipo de 
+1. Automatización de tareas relacionadas con el desarrollo. En
+   resumen, que no haya que recordar o tener apuntados en una libreta comandos para hacer todo tipo de
    cosas (instalación de librerías o configuración de una máquina)
    sino que haya *scripts* que lo homogeneicen y automaticen.
 
-2. *Virtualización*: uso de recursos virtuales para almacenamiento,
+2. Virtualización: uso de recursos virtuales para almacenamiento,
    publicación y, en general, todos los pasos del desarrollo y
    despliegue de software.
 
-5. *Provisionamiento de los servidores*: los servidores virtuales a los
+5. Provisionamiento de los servidores: los servidores virtuales a los
    que se despliegue deben estar preparados con todas las herramientas
    necesarias para publicar la aplicación.
 
-6. *Gestión de configuraciones*: la gestión de las configuraciones de
+6. Gestión de configuraciones: la gestión de las configuraciones de
    los servidores y las órdenes para provisionamiento deben estar
    controladas por un sistema de gestión de versiones que permita
    pruebas y también controlar en cada momento el entorno en el que
    efectivamente se está ejecutando el software.
 
-3. *Despliegue en la nube*: publicación de aplicaciones en servidores
+3. Despliegue en la nube: publicación de aplicaciones en servidores
    virtuales.
 
-4. [Ciclo de vida del software](https://es.slideshare.net/colmbennett/software-rollout)
+4. [Ciclo de vida del software](http://es.slideshare.net/colmbennett/software-rollout)
    definición de las diferentes fases en la vida de una aplicación,
    desde el diseño hasta el soporte.
 
-7. *Despliegue continuo*: el ciclo de vida de una aplicación debe ir
+7. Despliegue continuo: el ciclo de vida de una aplicación debe ir
    ligado a ciclos de desarrollo ágiles en los que cada nueva
    característica se introduzca tan pronto esté lista y probada; el
    despliegue continuo implica integración continua de las nuevas
@@ -95,8 +85,8 @@ seleccione la versión precisa que se va a usar.
 
 Y estos entornos virtuales vienen del hecho de que los lenguajes de scripting tales como Perl, Python y Ruby tienen
 ciclos de desarrollo muy rápidos que hacen que a veces convivan en
-producción diferentes versiones de los mismos, incluso versiones
-*major*. Eso hace complicado desarrollar e incluso probar los 
+producción diferentes versiones de los mismos, incluso *major*
+versions. Eso hace complicado desarrollar e incluso probar los
 programas que se desarrollan: si el sistema operativo viene con Perl
 5.14, puede que haga falta probar o desarrollar para 5.16 o 5.18 o
 incluso probar la versión más avanzada.
@@ -107,11 +97,11 @@ virtuales de desarrollo* tales como:
 *  [virtualenv para Python](https://virtualenv.pypa.io/en/latest/),
 *  [nodeenv](https://pypi.python.org/pypi/nodeenv/), [nvm](https://github.com/creationix/nvm), [`n`](https://github.com/tj/n) y [nave](https://github.com/isaacs/nave) para node.js,
 *  [`phpenv` para, lo adivinaste, PHP](https://github.com/phpenv/phpenv),
-*  [rbenv](https://github.com/sstephenson/rbenv) y [RVM](https://rvm.io)para Ruby
+*  [rbenv](https://github.com/sstephenson/rbenv) y [RVM](http://rvm.io)para Ruby
 *  y [plenv](https://github.com/tokuhirom/plenv) y [perlbrew para Perl](http://perlbrew.pl).
 
 Generalmente, estos programa funcionan instalando binarios en
-directorios del usuario y modificando el camino de ejecución para que se usen estas versiones en vez de las instaladas en el sistema. 
+directorios del usuario
 
 Una vez instalados, estos programas permiten instalar fácilmente
 nuevas versiones de tu lenguaje de programación (con las librerías
@@ -173,7 +163,7 @@ instalar y tener para ejecutarlo. En node se usa un fichero en formato
 JSON tal como este:
 
 	{
-	  "author": "J. J. Merelo <jjmerelo@gmail.com> (https://github.com/JJ/desarrollo-basado-pruebas)",
+	  "author": "J. J. Merelo <jjmerelo@gmail.com> (http://github.com/JJ/desarrollo-basado-pruebas)",
 	  "name": "porrio",
 	  "description": "Apuesta en una porra",
 	  "version": "0.0.1",
@@ -231,7 +221,7 @@ construcción, pero en node.js se utilizan principalmente dos:
 [Grunt](http://gruntjs.com) y [Gulp](http://gulpjs.com).
 
 >Aquí podíamos hacer una breve disquisición sobre
->[el código y la configuración](https://coding.abel.nu/2013/06/code-or-configuration-or-configuration-in-code/),
+>[el código y la configuración](http://coding.abel.nu/2013/06/code-or-configuration-or-configuration-in-code/),
 >algo a lo que nos vamos a enfrentar repetidamente en la nube. ¿Un
 >fichero de construcción es, o debe ser, configuración o código?
 >Diferentes herramientas toman diferentes aproximaciones al tema:
@@ -323,8 +313,7 @@ La automatización de Grunt se puede usar tanto para prueba como para
 despliegue. Pero hay también otras formas de probar en la nube, y lo
 veremos a continuación.
 
->Automatizar con `grunt` y `docco` (o algún otro sistema) la
->generación de documentación de la librería 
+>Automatizar con `grunt` y `docco` (o algún otro sistema) la generación de documentación de la librería
 >que se cree. Previamente, por supuesto, habrá que documentar tal
 >librería. 
 
@@ -356,11 +345,11 @@ primero es el marco de pruebas y el segundo la librería de pruebas que
 efectivamente se está usando.
 
 Vamos a ir al nivel más bajo: el de las aserciones. Hay [múltiples
-librerías que se pueden usar](https://stackoverflow.com/questions/14294567/assertions-library-for-node-js):
+librerías que se pueden usar](http://stackoverflow.com/questions/14294567/assertions-library-for-node-js):
 [Chai](http://chaijs.com/),
 [Should.js](https://github.com/visionmedia/should.js),
 [Must.js](https://github.com/moll/js-must) y
-[`assert`](https://nodejs.org/api/assert.html) que es la librería que
+[`assert`](http://nodejs.org/api/assert.html) que es la librería que
 forma parte de la estándar de JS, y por tanto la que vamos a usar. Se
 usa de la forma siguiente
 
@@ -388,14 +377,13 @@ nodejs (y, por supuesto, uno propio para cada uno de los lenguajes de
 programación, aunque en algunos están realmente estandarizados).
 
 Cada uno de ellos tendrá sus promotores y detractores, pero
-[Mocha](https://mochajs.org/) y [Jasmine](https://jasmine.github.io/)
+[Mocha](http://mochajs.org/) y [Jasmine](http://jasmine.github.io/)
 parecen ser los más populares. Los dos usan un sistema denominado
-[Behavior Driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development),
+[Behavior Driven Development](http://en.wikipedia.org/wiki/Behavior-driven_development),
 que consiste en describir el comportamiento de un sistema más o menos
 de alto nivel. Como hay que escoger uno y parece que Mocha es más
 popular, nos quedamos con este para escribir este programa de test.
 
-~~~~~javascript
     var assert = require("assert"),
 		apuesta = require(__dirname+"/../Apuesta.js");
 
@@ -414,7 +402,6 @@ popular, nos quedamos con este para escribir este programa de test.
 		});
 		});
 	});
-~~~~~
 
 Mocha puede usar diferentes librerías de test. En este caso hemos
 escogido la que ya habíamos usado, `assert`. A bajo nivel, los tests
@@ -444,9 +431,7 @@ que se ejecute.
 
 > Convertir los tests unitarios anteriores con assert a programas de
 > test y ejecutarlos desde *mocha*, usando descripciones del test y
-> del grupo de test de forma correcta. Si hasta ahora no has subido el
-> código que has venido realizando a GitHub, es el momento de hacerlo,
-> porque lo vamos a necesitar un poco más adelante.   
+> del grupo de test de forma correcta. Si hasta ahora no has subido el código que has venido realizando a GitHub, es el momento de hacerlo, porque lo vamos a necesitar un poco más adelante. 
 
 
 ##Añadiendo integración continua.
@@ -471,11 +456,11 @@ sí con las librerías del lenguaje de programación en el que está
 desarrollado.
 
 Un sistema bastante popular de integración continua es
-[Jenkins](https://jenkins-ci.org/), pero está enfocado sobre todo a
+[Jenkins](http://jenkins-ci.org/), pero está enfocado sobre todo a
 Java. Jenkins lo puedes usar en la nube o instalarte tu propio
 ordenador para hacerlo. Sin embargo, está enfocado sobre todo a Java
-por lo que hay otros sistemas como [Travis](https://travis-ci.org) o
-[Shippable](http://apps.shippable.com/) que podemos usar también desde
+por lo que hay otros sistemas como [Travis](http://travis-ci.org) o
+[Shippable](https://www.shippable.com/) que podemos usar también desde
 la nube y, además, están preparados para más lenguajes de
 programación.
 
@@ -504,7 +489,6 @@ tests. Para ello se provisiona una máquina virtual (o contenedor), se
 le carga el sistema operativo y se instala lo necesario, indicado en
 el fichero de configuración tal como este para Travis.
 
-~~~~~YAML
 	language: node_js
 	node_js:
 	  - "0.10"
@@ -513,7 +497,6 @@ el fichero de configuración tal como este para Travis.
 	  - npm install -g mocha
 	  - cd src; npm install .
 	script: cd src; mocha
-~~~~~
 
 Este fichero, denominado `.travis.yml`, contiene lo siguiente:
 
@@ -559,13 +542,6 @@ integración continua y los tests correspondientes son un paso esencial
 para el despliegue continuo, que se verá más adelante.
 
 ## A dónde ir desde aquí
-
-Esta
-[página](http://www.jedi.be/blog/2010/02/12/what-is-this-devops-thing-anyway/)
-lista una serie de recursos útiles, incluyendo blogs y canales de IRC,
-aparte de diferentes herramientas que deben estar en el carcaj del
-arquero DevOps, aunque la mayoría de los enlaces a estos están
-atrasados (y uno está en chino, así que no tengo ni idea). 
 
 Una vez visto todo lo necesario para desplegar una aplicación, se
 puede pasar a estudiar los
