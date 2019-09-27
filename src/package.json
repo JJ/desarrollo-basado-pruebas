@@ -11,13 +11,12 @@
     "test": "mocha"
   },
   "dependencies": {
-    "sqlite3": "~3.0"
+    "sqlite3": "^4.0"
   },
   "devDependencies": {
     "assert": "^1.1.2",
     "docco": "~0.6",
-    "grunt-docco": "~0.3.3",
-    "mocha": "~2.0.1"
+    "mocha": "^6.2.0"
   },
   "optionalDependencies": {},
   "engines": {
