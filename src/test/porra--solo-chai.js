@@ -1,4 +1,4 @@
-wvar assert = require("chai").should(),
+var assert = require("chai").should(),
     apuesta = require(__dirname+"/../Apuesta.js");
 
 describe('BDD con Chai', function(){
