@@ -1,6 +1,8 @@
 Desarrollo basado en pruebas
 =========================
 
+[![Build Status](https://travis-ci.org/JJ/desarrollo-basado-pruebas.svg?branch=master)](https://travis-ci.org/JJ/desarrollo-basado-pruebas)
+
 ##Objetivos
 
 1. Entender el concepto de *DevOps*
