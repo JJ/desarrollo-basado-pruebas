@@ -1,7 +1,6 @@
 var assert = require("chai").assert,
     apuesta = require(__dirname+"/../Apuesta.js");
 
-console.log(assert);
 describe('Apuesta con Chai', function(){
     // Testea que se haya cargado bien la librería
     describe('Carga', function(){
