@@ -11,7 +11,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "sqlite3": "^5.1"
+    "sqlite3": "^6.0"
   },
   "devDependencies": {
     "assert": "^1.1.2",
